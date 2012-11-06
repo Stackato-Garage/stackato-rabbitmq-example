@@ -6,8 +6,19 @@ html
   body
     h1= title
     p Please select an option:
-    form
-      input
-      input
-      input(type='submit')
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js')
+    form(action='/start-server', method='post')
+      input.button(type='submit', value='Start the server')
+    form(action='/new-exchange', method='post')
+      input.button(type='submit', value='Establish an exchange')
+    form(action='/new-queue', method='post')
+      input.button(type='submit', value='Establish a message queue')
+    form(action='/')
+
+  h3 The connection status is currently:
+  p= connectionStatus
+  p= exchangeStatus
+  p= queueStatus
+
+  if (queueStatus == 'The queue is ready for use!' && exchangeStatus == 'An exchange has been established!')
+    h2 BOOM! SUCCESS!
+    a(href='/message-service') Click here to go to the messaging service!
