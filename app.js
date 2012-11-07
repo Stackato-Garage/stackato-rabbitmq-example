@@ -6,8 +6,6 @@ var express = require('express'),
 
 var app = express();
 
-var x = 10;
-
 app.configure(function(){
   app.set('port', process.env.VCAP_APP_PORT || 3000);
   app.set('views', __dirname + '/views');
@@ -22,7 +20,7 @@ app.queueStatus = 'No queue established';
 
 app.get('/', function(req, res){
   res.render('index.jade',
-    { 
+    {
       title: 'Welcome to RabbitMQ and Node/Express on AppFog!',
       connectionStatus: app.connectionStatus,
       exchangeStatus: app.exchangeStatus,
@@ -73,7 +71,7 @@ app.post('/newMessage', function(req, res){
   var newMessage = req.body.newMessage;
   app.e.publish('routingKey', { message: newMessage });
 
-  app.q.subscribe(function(msg){  
+  app.q.subscribe(function(msg){
     var messageToDisplay = msg.message;
     res.render('message-service.jade',
       {
