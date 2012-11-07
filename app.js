@@ -6,6 +6,8 @@ var express = require('express'),
 
 var app = express();
 
+var x = 10;
+
 app.configure(function(){
   app.set('port', process.env.VCAP_APP_PORT || 3000);
   app.set('views', __dirname + '/views');
