@@ -37,10 +37,6 @@ function connectionUrl(){
   }
 }
 
-app.get('/env', function(req, res){
-  res.send(JSON.parse(process.env.VCAP_SERVICES)['rabbitmq-2.4'][0].credentials.url);
-});
-
 app.post('/start-server', function(req, res){
   app.rabbitMqConnection = amqp.createConnection({ url: connectionUrl() });
 
