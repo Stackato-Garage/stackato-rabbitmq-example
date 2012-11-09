@@ -19,13 +19,11 @@ app.exchangeStatus = 'No exchange established';
 app.queueStatus = 'No queue established';
 
 app.get('/', function(req, res){
-  res.render('index.jade',
-    {
-      title: 'Welcome to RabbitMQ and Node/Express on AppFog!',
-      connectionStatus: app.connectionStatus,
-      exchangeStatus: app.exchangeStatus,
-      queueStatus: app.queueStatus
-    });
+  res.render('index.jade', { title: 'Welcome to RabbitMQ and Node/Express on AppFog!',
+    connectionStatus: app.connectionStatus,
+    exchangeStatus: app.exchangeStatus,
+    queueStatus: app.queueStatus
+  });
 });
 
 function connectionUrl(){
@@ -36,6 +34,10 @@ function connectionUrl(){
     return 'amqp://localhost';
   }
 }
+
+app.get('/env', function(req, res){
+  res.send(connectionUrl());
+});
 
 app.post('/start-server', function(req, res){
   app.rabbitMqConnection = amqp.createConnection({ url: connectionUrl() });
@@ -78,6 +80,7 @@ app.post('/newMessage', function(req, res){
         title: 'You\'ve got mail!',
         sentMessage: messageToDisplay
       });
+    app.rabbitMqConnection.end();
   });
 });
 
