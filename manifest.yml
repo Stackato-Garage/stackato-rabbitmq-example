@@ -7,11 +7,11 @@ applications:
         mem: 64M
         description: Node.js Application
         exec: 
-    name: af-rabbitmq-example
+    name: af-rabbit2
     mem: 128M
     url: ${name}.${target-base}
     services: 
       lucperkins-rabbitmq: 
         type: rabbitmq
     instances: 2
-    infra: rs
+    infra: aws
