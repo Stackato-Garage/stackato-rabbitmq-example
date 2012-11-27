@@ -35,10 +35,6 @@ function connectionUrl(){
   }
 }
 
-app.get('/env', function(req, res){
-  res.send(connectionUrl());
-});
-
 app.post('/start-server', function(req, res){
   app.rabbitMqConnection = amqp.createConnection({ url: connectionUrl() });
 
