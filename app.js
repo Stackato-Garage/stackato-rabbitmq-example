@@ -19,7 +19,7 @@ app.exchangeStatus = 'No exchange established';
 app.queueStatus = 'No queue established';
 
 app.get('/', function(req, res){
-  res.render('index.jade', { title: 'Welcome to RabbitMQ and Node/Express on AppFog!',
+  res.render('index.jade', { title: 'Welcome to RabbitMQ and Node/Express on Stackato!',
     connectionStatus: app.connectionStatus,
     exchangeStatus: app.exchangeStatus,
     queueStatus: app.queueStatus
@@ -27,9 +27,8 @@ app.get('/', function(req, res){
 });
 
 function connectionUrl(){
-  if (process.env.VCAP_SERVICES){
-    conf = JSON.parse(process.env.VCAP_SERVICES);
-    return conf['rabbitmq-2.4'][0].credentials.url;
+  if (process.env.RABBITMQ_URL){
+    return process.env.RABBITMQ_URL
   } else {
     return 'amqp://localhost';
   }
@@ -80,6 +79,7 @@ app.post('/newMessage', function(req, res){
   });
 });
 
+console.log('**', process.env.RABBITMQ_URL);
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });

@@ -3,15 +3,10 @@ applications:
   .: 
     framework: 
       name: node
-      info: 
-        mem: 64M
-        description: Node.js Application
-        exec: 
-    name: af-rabbit2
+    name: stackato-rabbit3
     mem: 128M
     url: ${name}.${target-base}
     services: 
-      lucperkins-rabbitmq: 
-        type: rabbitmq
+      rabbitmq: 
+        type: rabbitmq3
     instances: 2
-    infra: aws

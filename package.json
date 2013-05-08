@@ -1,5 +1,5 @@
 {
-  "name": "af-rabbitmq-example",
+  "name": "stackato-rabbitmq-example",
   "version": "0.0.1",
   "dependencies": {
     "express": "*",
